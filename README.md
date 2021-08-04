@@ -23,11 +23,11 @@ With these requirements we are using Kyverno to make these changes dynamically a
 
 ## Harbor Setup
 
-With Harbor installations this pattern works by setting up each approved external registry as a [registry endpoint][1] and then connecting a project configured as a [proxy cache][2] to that endpoint. The documentation in Harbor is a little confusing as the page is title `Creating Replication Endpoints` but really you are creating a registry endpoint that can be used for replication or as a source for a caching proxy.
+With Harbor installations this pattern works by setting up each approved external registry as a [registry endpoint][1] and then connecting a project configured as a [proxy cache][2] to that endpoint. The documentation in Harbor is a little confusing as the page is titled `Creating Replication Endpoints` but really you are creating a registry endpoint that can be used for replication, or as a source for a caching proxy.
 
 A pattern that is easy to understand is to name your registry endpoint and caching project the same. So, in the case of `quay.io` you will have a registry endpoint named `quay.io` and a caching proxy project called `quay.io`. To any admin going into Harbor it will be obvious how the registry endpoint is connected to the caching proxy project.
 
-To your users this should be entirely transparent with Kyverno installed in your clusters. All external references will get transformed to use their caching proxy project analogs and you are one step closer to not being impacted by external outages.
+To your users this should be entirely transparent with Kyverno installed in your clusters. All external references will get transformed to use their caching proxy project analogs, and you are one step closer to not being impacted by external outages.
 
 ## Thanks
 
