@@ -29,5 +29,9 @@ A pattern that is easy to understand is to name your registry endpoint and cachi
 
 To your users this should be entirely transparent with Kyverno installed in your clusters. All external references will get transformed to use their caching proxy project analogs and you are one step closer to not being impacted by external outages.
 
+## Thanks
+
+Many thanks to @NoSkillGirl and @realshuting for helping with the Kyverno setup. Kyverno is pretty great, and the people working on the project are also pretty great!
+
 [1]: https://goharbor.io/docs/2.3.0/administration/configuring-replication/create-replication-endpoints/
 [2]: https://goharbor.io/docs/2.3.0/administration/configure-proxy-cache/
