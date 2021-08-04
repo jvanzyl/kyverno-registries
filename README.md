@@ -1,4 +1,4 @@
-# Image Registry Mutations
+# Using Kyvero and Harbor to safeguard production systems
 
 The use case is to allow an approved set of external registries to be used by our developers, where the image references are rewritten to use an internal Harbor proxy cache we have for the given external registry. For simplicity we create the project in Harbor with a name that matches the registry identifier. For the sake of explanation let's say we want to allow the following external registries:
 
