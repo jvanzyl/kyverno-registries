@@ -1,0 +1,100 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: replace-image-registries
+spec:
+  background: false
+  rules:
+    # We only allow a known set of approved registries to be used in our clusters
+    - name: validate-registries
+      match:
+        resources:
+          kinds:
+          - Pod
+      validate:
+        message: "Unapproved image registry."
+        pattern:
+          spec:
+            containers:
+            - image: "harbor.myco.com/* | quay.io/* | gcr.io/* | ghcr.io/* | docker.io/*"
+
+    # Rewrite the reference to quay.io to our internal Harbor caching proxy:
+    # quay.io/jetstack/cert-manager:v1.4.1 -> harbor.myco.com/quay.io/jetstack/cert-manager:v1.4.1
+    - name: replace-quay.io
+      match:
+        resources:
+          kinds:
+          - Pod
+      mutate:
+        patchStrategicMerge:
+          spec:
+            containers:
+            - (name): "*"
+              image: |-
+                {{ regex_replace_all('^quay.io/', '{{@}}', 'harbor.myco.com/quay.io/') }}
+
+    # Rewrite the reference to gcr.io to our internal Harbor caching proxy:
+    # gcr.io/heptio-images/eventrouter:v0.3 -> harbor.myco.com/grc.io/heptio-images/eventrouter:v0.3
+    - name: replace-gcr.io
+      match:
+        resources:
+          kinds:
+          - Pod
+      mutate:
+        patchStrategicMerge:
+          spec:
+            containers:
+            - (name): "*"
+              image: |-
+                {{ regex_replace_all('^gcr.io/', '{{@}}', 'harbor.myco.com/gcr.io/') }}
+
+    # Rewrite the reference to ghcr.io to our internal Harbor caching proxy:
+    # ghcr.io/jvanzyl/dimg:1.0.0 -> harbor.myco.com/ghrc.io/jvanzyl/dimg:1.0.0
+    - name: replace-ghcr.io
+      match:
+        resources:
+          kinds:
+          - Pod
+      mutate:
+        patchStrategicMerge:
+          spec:
+            containers:
+            - (name): "*"
+              image: |-
+                {{ regex_replace_all('^ghcr.io/', '{{@}}', 'harbor.myco.com/ghcr.io/') }}
+
+    # Rewrite the reference to docker.io to our internal Harbor caching proxy:
+    # docker.io/kyverno/kyverno:lastest -> harbor.myco.com/docker.io/kyverno/kyverno:latest
+    - name: replace-docker.io
+      match:
+        resources:
+          kinds:
+          - Pod
+      mutate:
+        patchStrategicMerge:
+          spec:
+            containers:
+            - (name): "*"
+              image: |-
+                {{ regex_replace_all('^docker.io/', '{{@}}', 'harbor.myco.com/docker.io/') }}
+
+    # At this point we expect everything that has a registry prefix to have been transformed
+    # harbor.myco.com.*. We are not sure how to catch the remaining docker references like:
+    #
+    # - velero/velero:v1.6.2
+    # - nginx:latest
+    # - nginx
+    #
+    # Without interfering with our newly rewritten references that start with harbor.myco.com
+    - name: replace-docker
+      match:
+        resources:
+          kinds:
+          - Pod
+      mutate:
+        patchStrategicMerge:
+          spec:
+            containers:
+            - (name): "*"
+              image: |-
+                {{ regex_replace_all('^[^harbor.myco.com](.*)', '{{@}}', 'harbor.myco.com/docker.io/') }}
