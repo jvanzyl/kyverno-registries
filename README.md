@@ -31,7 +31,9 @@ To your users this should be entirely transparent with Kyverno installed in your
 
 ## Thanks
 
-Many thanks to @NoSkillGirl and @realshuting for helping with the Kyverno setup. Kyverno is pretty great, and the people working on the project are also pretty great!
+Many thanks to [@NoSkillGirl][3] and [@realshuting][4] for helping with the Kyverno setup. Kyverno is pretty great, and the people working on the project are also pretty great!
 
 [1]: https://goharbor.io/docs/2.3.0/administration/configuring-replication/create-replication-endpoints/
 [2]: https://goharbor.io/docs/2.3.0/administration/configure-proxy-cache/
+[3]: https://github.com/noskillgirl
+[4]: https://github.com/realshuting
