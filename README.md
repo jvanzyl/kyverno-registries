@@ -10,8 +10,8 @@ The use case is to allow an approved set of external registries to be used by ou
 Additionally for docker.io, we need to deal with the variants where the docker.io registry is implied. So for our list of approved registries above we wish the following transformations to happen:
 
 ```
-gcr.io/heptio-images/eventrouter:v0.3  -> harbor.myco.com/grc.io/heptio-images/eventrouter:v0.3
-ghcr.io/jvanzyl/dimg:1.0.0             -> harbor.myco.com/ghrc.io/jvanzyl/dimg:1.0.0
+gcr.io/heptio-images/eventrouter:v0.3  -> harbor.myco.com/gcr.io/heptio-images/eventrouter:v0.3
+ghcr.io/jvanzyl/dimg:1.0.0             -> harbor.myco.com/ghcr.io/jvanzyl/dimg:1.0.0
 quay.io/jetstack/cert-manager:v1.4.1   -> harbor.myco.com/quay.io/jetstack/cert-manager:v1.4.1
 docker.io/nirmata/kyverno:lastest      -> harbor.myco.com/docker.io/nirmata/kyverno:latest
 velero/velero:v1.6.2                   -> harbor.myco.com/docker.io/velero/velero:v1.6.2
