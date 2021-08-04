@@ -13,7 +13,7 @@ Additionally for docker.io, we need to deal with the variants where the docker.i
 gcr.io/heptio-images/eventrouter:v0.3  -> harbor.myco.com/grc.io/heptio-images/eventrouter:v0.3
 ghcr.io/jvanzyl/dimg:1.0.0             -> harbor.myco.com/ghrc.io/jvanzyl/dimg:1.0.0
 quay.io/jetstack/cert-manager:v1.4.1   -> harbor.myco.com/quay.io/jetstack/cert-manager:v1.4.1
-docker.io/kyverno/kyverno:lastest      -> harbor.myco.com/docker.io/kyverno/kyverno:latest
+docker.io/nirmata/kyverno:lastest      -> harbor.myco.com/docker.io/nirmata/kyverno:latest
 velero/velero:v1.6.2                   -> harbor.myco.com/docker.io/velero/velero:v1.6.2
 nginx:latest                           -> harbor.myco.com/docker.io/nginx:latest
 nginx                                  -> harbor.myco.com/docker.io/nginx
