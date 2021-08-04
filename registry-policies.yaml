@@ -18,8 +18,7 @@ spec:
             containers:
             - image: "harbor.myco.com/* | quay.io/* | gcr.io/* | ghcr.io/* | docker.io/*"
 
-    # Rewrite the reference to docker.io to our internal Harbor caching proxy:
-    # docker.io/kyverno/kyverno:lastest -> harbor.myco.com/docker.io/kyverno/kyverno:latest
+    # Rewrite all the references for our approved external registries
     - name: replace-registries
       match:
         resources:
