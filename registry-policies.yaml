@@ -33,7 +33,7 @@ spec:
                 {{ regex_replace_all('(quay.io|gcr.io|ghcr.io|docker.io)/(.*)', '{{@}}', 'harbor.myco.com/$1/$2') }}
 
     # At this point we expect everything that has a registry prefix to have been transformed
-    # harbor.myco.com.*. We are not sure how to catch the remaining docker references like:
+    # harbor.myco.com.*. We are left with references like:
     #
     # - velero/velero:v1.6.2
     # - nginx:latest
