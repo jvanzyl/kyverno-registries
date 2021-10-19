@@ -42,3 +42,10 @@ function executePolicy() {
   executePolicy "docker-library-no-tag" "harbor.myco.com/docker.io/nginx"
   [ $? -eq 0 ]
 }
+
+@test "Kyverno registry policy for pod with multiple containers" {
+  executePolicy "multiple-containers" "harbor.myco.com/ghcr.io/heptio-images/eventrouter:v0.3"
+  [ $? -eq 0 ]
+  executePolicy "multiple-containers" "harbor.myco.com/quay.io/jetstack/cert-manager:v1.4.1"
+  [ $? -eq 0 ]
+}
